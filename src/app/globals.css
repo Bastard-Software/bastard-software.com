@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
 :root {
+  /* Clinical-trust light base */
   --background: #ffffff;
-  --foreground: #171717;
+  --surface: #f5f8fa;
+  --surface-alt: #eef2f6;
+  --foreground: #0b1220;
+  --muted: #4b5768;
+  --border: #e2e8ef;
+
+  /* AI / GPU accent system */
+  --accent: #0891a8;
+  --accent-strong: #067690;
+  --accent-soft: #e3f4f6;
+  --signal: #7c5cff;
+  --signal-soft: #efeaff;
+
+  /* Dark hero / deep-tech surface */
+  --hero-bg: #05070c;
+  --hero-bg-2: #0a1018;
+  --hero-foreground: #f3f6f8;
+  --hero-muted: #9aa7b8;
+  --hero-border: #1b2430;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-alt: var(--surface-alt);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-signal: var(--signal);
+  --color-signal-soft: var(--signal-soft);
+
+  --color-hero-bg: var(--hero-bg);
+  --color-hero-bg-2: var(--hero-bg-2);
+  --color-hero-foreground: var(--hero-foreground);
+  --color-hero-muted: var(--hero-muted);
+  --color-hero-border: var(--hero-border);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-jetbrains-mono);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--signal-soft);
+  color: var(--foreground);
+}
+
+.font-display {
+  font-family: var(--font-display), var(--font-sans), sans-serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+/* Grid texture used inside dark hero / GPU-flavoured sections */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.bg-grid-light {
+  background-image:
+    linear-gradient(to right, rgba(11, 18, 32, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 18, 32, 0.045) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
 }
