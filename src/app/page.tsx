@@ -14,101 +14,113 @@ import GlowHero from "@/components/GlowHero";
 import Badge from "@/components/Badge";
 import SectionHeading from "@/components/SectionHeading";
 import PillarCard from "@/components/PillarCard";
+import Reveal from "@/components/Reveal";
 
 const pillars = [
   {
     icon: MapPinned,
     tag: "01 — Trial Matcher",
-    title: "Find the closest matching clinical trial in seconds",
+    title: "Instant clinical trial matching for oncologists",
     description:
-      "A panel built for oncologists: enter an indication and biomarkers, get back recruiting trials and drug reimbursement programmes ranked by fit and location — no patient sequence required.",
+      "Our live clinician-facing portal. Enter patient biomarkers and location to instantly retrieve recruiting trials and drug reimbursement programmes using our LLM-powered RAG architecture.",
     href: "/platform#trial-matcher",
   },
   {
     icon: Dna,
     tag: "02 — OncoKernel",
-    title: "Full tumor genome interpretation, with a clinical copilot",
+    title: "GPU-accelerated tumor genome interpretation",
     description:
-      "An on-premise pipeline that calls somatic variants, classifies mutations against a live knowledge graph, scores unknown variants with a genomic foundation model, and presents therapy options with citations.",
+      "Our on-premise pipeline processing FASTQ to actionable insights. We leverage GPU-accelerated foundation models to score variants of unknown significance and match genotypes to therapies.",
     href: "/platform#oncokernel",
   },
   {
     icon: Cpu,
     tag: "03 — Digital Twin",
-    title: "A GPU-native digital twin for the tumor microenvironment",
+    title: "GPU-accelerated spatial tumor simulation",
     description:
-      "A Vulkan-compute agent-based simulation engine for testing immunotherapies and drugs against a virtual tumor microenvironment before they ever reach a patient.",
+      "An Agent-Based Modeling (ABM) engine written in SYCL, compiling to native CUDA on NVIDIA hardware. We simulate the tumor microenvironment and immune infiltration on GPU to test therapy efficacy in-silico.",
     href: "/platform#digital-twin",
   },
   {
     icon: Syringe,
-    tag: "04 — AI + Wet Lab",
-    title: "Designing and testing mRNA vaccines and CAR-T therapies",
+    tag: "04 — AI & Wet Lab (Future)",
+    title: "Designing mRNA & CAR-T therapies",
     description:
-      "From the digital twin's predictions to the bench: AI-designed personalized mRNA neoantigen vaccines and CAR-T cell therapies, prepared and validated in patient-derived organoid models.",
+      "Our future horizon: taking BioNeMo-generated protein structures and validating AI-designed neoantigen vaccines physically in patient-derived organoids.",
     href: "/platform#ai-wetlab",
   },
 ];
 
 const highlights = [
   {
-    icon: ShieldCheck,
-    title: "On-premise by design",
+    icon: Cpu,
+    title: "GPU-native & AI-first",
     description:
-      "Every inference runs inside the hospital's own network. Patient sequences never egress — GDPR Art. 9 compliant by construction, not by policy.",
+      "From accelerated bioinformatics pipelines to spatial SYCL-compute simulations, our stack is engineered for GPU acceleration — compiling to CUDA and integrating NVIDIA BioNeMo where they matter most.",
   },
   {
-    icon: Cpu,
-    title: "GPU-native, vendor-agnostic",
+    icon: ShieldCheck,
+    title: "On-premise & GDPR-compliant",
     description:
-      "Our simulation core runs on Vulkan compute — portable across NVIDIA, AMD, Intel, and ARM — so it runs on whatever accelerator a hospital or lab already owns.",
+      "Patient data never egresses to public clouds. Our containerized pipeline runs securely inside the hospital's network, ensuring full compliance by construction.",
   },
   {
     icon: BrainCircuit,
-    title: "Explainable, not opaque",
+    title: "Grounded LLM Reasoning",
     description:
-      "Every recommendation is grounded and citable: knowledge-graph evidence, biomedical retrieval, and physics-based simulation instead of black-box guesses.",
+      "Every clinical recommendation is backed by Semantic RAG, served locally on GPU, linking molecular profiles directly to cited biomedical literature and real-time trial registries.",
   },
   {
     icon: Microscope,
-    title: "Built by clinician and engineer",
+    title: "Built by a clinician and an engineer",
     description:
-      "Founded by a physician and a computer scientist, with a practicing oncologist as clinical design partner from day one.",
+      "Founded by a physician and a GPU systems engineer, bridging the gap between clinical reality and high-performance computing.",
   },
 ];
+
+const pipelineChips = ["Trial Matcher", "OncoKernel", "Digital Twin", "NVIDIA BioNeMo"];
 
 export default function Home() {
   return (
     <>
-      {/* HERO */}
       <section className="relative isolate overflow-hidden">
         <GlowHero />
         <Container className="relative py-28 sm:py-36">
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
-            <Badge dark>Precision Oncology × GPU Computing</Badge>
-            <h1 className="font-display text-4xl font-semibold tracking-tight text-hero-foreground sm:text-6xl">
-              The full pipeline from tumor genome to personalized therapy
+            <Badge dark dot>
+              Precision Oncology × Accelerated Computing
+            </Badge>
+            <h1 className="font-display text-4xl font-semibold leading-[1.08] tracking-tight text-hero-foreground sm:text-6xl">
+              The AI-accelerated pipeline for{" "}
+              <span className="text-gradient-light">personalized oncology</span>
             </h1>
             <p className="max-w-2xl text-lg leading-relaxed text-hero-muted">
-              Bastard Software builds the AI and GPU-simulation infrastructure that
-              turns a raw tumor sequence into a matched clinical trial, an
-              explainable treatment plan, and — eventually — a therapy designed
-              and tested for that specific patient.
+              Bastard Software builds the compute infrastructure that translates raw tumor sequences into matched clinical trials, explainable treatment plans, and spatial GPU simulations of the tumor microenvironment.
             </p>
             <div className="flex flex-col gap-4 sm:flex-row">
               <Link
                 href="/platform"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-strong"
+                className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium"
               >
                 Explore the platform
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-hero-border px-6 py-3 text-sm font-medium text-hero-foreground transition-colors hover:bg-white/5"
+                className="btn-ghost inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium"
               >
                 Talk to us
               </Link>
+            </div>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
+              {pipelineChips.map((chip) => (
+                <span
+                  key={chip}
+                  className="rounded-full border border-hero-border bg-white/5 px-3 py-1 font-mono text-xs text-hero-muted"
+                >
+                  {chip}
+                </span>
+              ))}
             </div>
           </div>
         </Container>
@@ -117,32 +129,37 @@ export default function Home() {
       {/* THESIS */}
       <section className="bg-background py-24 sm:py-28">
         <Container>
-          <SectionHeading
-            eyebrow="The problem"
-            title="Sequencing a tumor is cheap. Interpreting it is not."
-            description="Hospitals can now generate terabytes of tumor sequence data, but most lack the bioinformatics pipeline, the on-premise compute, and the cross-disciplinary expertise to turn it into a treatment decision. Actionable mutations go unseen, and patients go unmatched to the trials and therapies that could help them."
-          />
-          <p className="mt-8 max-w-3xl text-base leading-relaxed text-muted">
-            We are building the translation layer that closes that gap — end to
-            end, from the first search for a nearby clinical trial, through full
-            somatic genome interpretation with a physician copilot, to a
-            GPU-accelerated digital twin that simulates how a specific tumor
-            responds to therapy before it is ever administered.
-          </p>
+          <Reveal>
+            <SectionHeading
+              eyebrow="The problem"
+              title={
+                <>
+                  Sequencing is cheap.{" "}
+                  <span className="text-gradient">Compute-driven interpretation is the bottleneck.</span>
+                </>
+              }
+              description="Hospitals generate terabytes of sequence data, but lack the HPC pipelines and AI reasoning to make it actionable. Actionable mutations are missed, and patients fail to match with life-saving trials."
+            />
+          </Reveal>
         </Container>
       </section>
 
       {/* PILLARS */}
-      <section className="bg-surface py-24 sm:py-28">
-        <Container>
-          <SectionHeading
-            eyebrow="The pipeline"
-            title="Tools, one continuous pipeline"
-            description="Each tool ships independently and stands on its own — together, they form a single path from diagnosis to personalized therapy. More tools join this pipeline over time."
-          />
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-grid-light opacity-40" />
+        <Container className="relative">
+          <Reveal>
+            <SectionHeading
+              eyebrow="The Platform"
+              title="A unified ecosystem for clinical decision support"
+              description="From instant trial matching for clinicians to deep GPU-accelerated tumor simulation."
+            />
+          </Reveal>
           <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {pillars.map((pillar) => (
-              <PillarCard key={pillar.href} {...pillar} />
+            {pillars.map((pillar, i) => (
+              <Reveal key={pillar.href} delay={i * 0.08}>
+                <PillarCard {...pillar} />
+              </Reveal>
             ))}
           </div>
         </Container>
@@ -151,45 +168,29 @@ export default function Home() {
       {/* TECH HIGHLIGHTS */}
       <section className="bg-background py-24 sm:py-28">
         <Container>
-          <SectionHeading
-            eyebrow="Why it's different"
-            title="Engineered for hospitals, not just for demos"
-            align="center"
-          />
+          <Reveal>
+            <SectionHeading
+              eyebrow="Why it's different"
+              title="Engineered for high-performance computing"
+              align="center"
+            />
+          </Reveal>
           <div className="mx-auto mt-14 grid max-w-5xl grid-cols-1 gap-x-10 gap-y-12 sm:grid-cols-2">
-            {highlights.map((item) => (
-              <div key={item.title} className="flex gap-4">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-strong">
-                  <item.icon className="h-5 w-5" strokeWidth={1.75} />
+            {highlights.map((item, i) => (
+              <Reveal key={item.title} delay={i * 0.08}>
+                <div className="flex gap-4">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-strong">
+                    <item.icon className="h-5 w-5" strokeWidth={1.75} />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-base font-semibold text-foreground">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-display text-base font-semibold text-foreground">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">{item.description}</p>
-                </div>
-              </div>
+              </Reveal>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* CTA */}
-      <section className="relative isolate overflow-hidden">
-        <GlowHero />
-        <Container className="relative py-24 text-center sm:py-28">
-          <h2 className="mx-auto max-w-2xl font-display text-3xl font-semibold tracking-tight text-hero-foreground sm:text-4xl">
-            Building the translation layer between a tumor&apos;s genome and the
-            therapy that treats it.
-          </h2>
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/contact"
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-strong"
-            >
-              Get in touch
-              <ArrowRight className="h-4 w-4" />
-            </Link>
           </div>
         </Container>
       </section>

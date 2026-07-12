@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export default function SectionHeading({
   eyebrow,
   title,
@@ -6,21 +8,26 @@ export default function SectionHeading({
   dark = false,
 }: {
   eyebrow?: string;
-  title: string;
+  title: ReactNode;
   description?: string;
   align?: "left" | "center";
   dark?: boolean;
 }) {
-  const alignClass = align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
+  const alignClass =
+    align === "center" ? "text-center items-center mx-auto" : "text-left items-start";
 
   return (
     <div className={`flex max-w-2xl flex-col gap-4 ${alignClass}`}>
       {eyebrow && (
         <span
-          className={`font-mono text-xs font-medium uppercase tracking-[0.18em] ${
+          className={`inline-flex items-center gap-2 font-mono text-xs font-medium uppercase tracking-[0.18em] ${
             dark ? "text-accent" : "text-accent-strong"
           }`}
         >
+          <span
+            className={`h-px w-6 ${dark ? "bg-accent/60" : "bg-accent-strong/50"}`}
+            aria-hidden="true"
+          />
           {eyebrow}
         </span>
       )}
@@ -32,7 +39,11 @@ export default function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className={`text-base leading-relaxed sm:text-lg ${dark ? "text-hero-muted" : "text-muted"}`}>
+        <p
+          className={`text-base leading-relaxed sm:text-lg ${
+            dark ? "text-hero-muted" : "text-muted"
+          }`}
+        >
           {description}
         </p>
       )}

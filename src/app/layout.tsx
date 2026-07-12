@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s — Bastard Software",
   },
   description:
-    "Bastard Software builds the on-premise AI and GPU-simulation pipeline for personalized cancer treatment: clinical trial matching, tumor DNA interpretation with a clinical copilot, and a GPU-accelerated digital twin for testing immunotherapies and mRNA neoantigen vaccines in-silico.",
+    "Bastard Software builds the on-premise, GPU-accelerated AI pipeline for personalized cancer treatment: clinical trial matching, tumor DNA interpretation, a SYCL/CUDA-powered digital twin, and NVIDIA BioNeMo-designed mRNA neoantigen vaccines — all in-silico before reaching a patient.",
   keywords: [
     "precision oncology",
     "AI cancer treatment",
@@ -36,13 +36,14 @@ export const metadata: Metadata = {
     "tumor DNA analysis",
     "digital twin oncology",
     "mRNA neoantigen vaccine",
+    "NVIDIA BioNeMo",
     "GPU simulation",
     "NVIDIA Inception",
   ],
   openGraph: {
     title: "Bastard Software — Personalized Oncology, Engineered",
     description:
-      "On-premise AI and GPU simulation for personalized cancer treatment — trial matching, tumor genome interpretation, and a digital twin for immunotherapy and mRNA vaccine design.",
+      "On-premise, GPU-accelerated AI for personalized cancer treatment — trial matching, tumor genome interpretation, and a digital twin for immunotherapy and mRNA vaccine design.",
     url: "https://bastard-software.com",
     siteName: "Bastard Software",
     type: "website",

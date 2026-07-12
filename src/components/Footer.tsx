@@ -39,6 +39,9 @@ export default function Footer() {
               treatment — from trial matching to tumor genome interpretation to
               in-silico therapy testing.
             </p>
+            <p className="mt-3 text-xs font-mono text-hero-muted/80">
+              Built on NVIDIA CUDA, BioNeMo &amp; Evo 2.
+            </p>
             <p className="mt-4 text-xs leading-relaxed text-hero-muted/70">
               Our tools provide informational, research-oriented decision support.
               They do not diagnose, prescribe, or replace the judgment of a
