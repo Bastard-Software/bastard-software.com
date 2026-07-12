@@ -16,7 +16,7 @@ const team = [
     name: "Mateusz Bahyrycz",
     role: "Founder & CEO",
     badges: ["MD", "GPU / CUDA Systems Engineer"],
-    bio: "Mateusz founded Bastard Software to close the gap between clinical medicine and the low-level compute infrastructure precision oncology actually needs — from Vulkan compute shaders to on-premise AI inference. He leads the company's technical architecture and the Digital Twin simulation engine.",
+    bio: "Mateusz founded Bastard Software to close the gap between clinical medicine and the low-level compute infrastructure precision oncology actually needs — from SYCL/CUDA compute kernels to on-premise AI inference. He leads the company's technical architecture and the Digital Twin simulation engine.",
   },
   {
     initials: "RN",
@@ -34,7 +34,12 @@ export default function AboutPage() {
         <Container>
           <SectionHeading
             eyebrow="About"
-            title="Founded by a physician and a computer scientist"
+            title={
+              <>
+                Founded by a physician and{" "}
+                <span className="text-gradient">a computer scientist</span>
+              </>
+            }
             description="Bastard Software exists because the hardest parts of precision oncology — clinical judgment and AI/GPU systems engineering — are almost never found in the same room. We put both in the founding team."
           />
         </Container>

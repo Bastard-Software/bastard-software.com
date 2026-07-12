@@ -18,7 +18,7 @@ export default function ContactPage() {
           <div>
             <SectionHeading
               eyebrow="Contact"
-              title="Let's talk"
+              title={<span className="text-gradient">Let&apos;s talk</span>}
               description="Whether you're a hospital exploring a pilot, a researcher interested in the platform, or an investor — we'd like to hear from you."
             />
             <div className="mt-10 space-y-4">
@@ -31,7 +31,7 @@ export default function ContactPage() {
               </a>
               <div className="flex items-center gap-3 text-sm text-muted">
                 <MapPin className="h-5 w-5 text-accent-strong" />
-                Poland — building for CEE &amp; EU hospitals first
+                Kraków, Poland — built for hospitals worldwide
               </div>
             </div>
           </div>

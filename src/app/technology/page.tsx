@@ -19,12 +19,42 @@ import Badge from "@/components/Badge";
 export const metadata: Metadata = {
   title: "Technology",
   description:
-    "The architecture behind Bastard Software: on-premise GDPR-by-design infrastructure, a genomic AI stack, and a Vulkan-native GPU simulation engine.",
+    "The architecture behind Bastard Software: on-premise GDPR-by-design infrastructure, GPU-accelerated genomic AI (NVIDIA BioNeMo, Evo 2), and a SYCL/CUDA simulation engine.",
 };
 
 const stack = [
-  "SAGE", "PURPLE", "LILAC", "Neo4j", "Evo 2", "LangGraph", "MedCPT",
-  "Streamlit", "Vulkan 1.3", "C++20", "Dear ImGui", "Python", "Docker", "CMake",
+  { name: "NVIDIA BioNeMo", nvidia: true },
+  { name: "SYCL / CUDA", nvidia: true },
+  { name: "Evo 2", nvidia: false },
+  { name: "Nextflow", nvidia: false },
+  { name: "Docker", nvidia: false },
+  { name: "SAGE & PURPLE", nvidia: false },
+  { name: "LangGraph", nvidia: false },
+  { name: "Qdrant", nvidia: false },
+  { name: "Python", nvidia: false },
+];
+
+const workloads = [
+  {
+    workload: "Novel variant (VUS) scoring",
+    tech: "Evo 2 (7B, quantized), GPU-accelerated",
+    why: "Deterministic calling (SAGE/PURPLE/LILAC) already runs on CPU — but scoring the variants no database has classified needs a foundation model in the loop, and that doesn't fit a real-time CPU budget.",
+  },
+  {
+    workload: "Neoantigen & protein design",
+    tech: "NVIDIA BioNeMo",
+    why: "Structure prediction and docking (AlphaFold2/ESMFold-class models) to design and rank personalized vaccine candidates.",
+  },
+  {
+    workload: "Clinical copilot inference",
+    tech: "Local LLM, GPU-accelerated",
+    why: "Low-latency, quantized on-premise serving — the copilot answers in seconds without a single call to a cloud API.",
+  },
+  {
+    workload: "Tumor microenvironment simulation",
+    tech: "SYCL compute",
+    why: "Thousands of interacting agents updated every frame — a CPU-bound simulator cannot run this at a clinically useful scale. Compiles to native CUDA on NVIDIA hardware.",
+  },
 ];
 
 export default function TechnologyPage() {
@@ -34,7 +64,11 @@ export default function TechnologyPage() {
         <Container>
           <SectionHeading
             eyebrow="Technology"
-            title="The architecture beneath the pipeline"
+            title={
+              <>
+                The architecture <span className="text-gradient">beneath the pipeline</span>
+              </>
+            }
             description="Three engineering decisions run through everything we build: patient data never leaves the hospital, every recommendation must be explainable, and the heavy compute belongs on a GPU."
           />
         </Container>
@@ -89,9 +123,15 @@ export default function TechnologyPage() {
                   </div>
                 ))}
               </div>
-              <div className="mt-5 flex items-center gap-2 text-xs text-muted">
-                <Lock className="h-3.5 w-3.5" />
-                GDPR Art. 9-aligned by design, not by policy
+              <div className="mt-5 space-y-2">
+                <div className="flex items-center gap-2 text-xs text-muted">
+                  <Lock className="h-3.5 w-3.5" />
+                  GDPR Art. 9-aligned by design, not by policy
+                </div>
+                <div className="flex items-center gap-2 text-xs text-muted">
+                  <Cpu className="h-3.5 w-3.5" />
+                  Target deployment: purpose-built edge hardware for regulated, on-premise medical AI
+                </div>
               </div>
             </div>
           </div>
@@ -101,32 +141,32 @@ export default function TechnologyPage() {
       {/* AI STACK */}
       <section className="bg-surface py-24 sm:py-28">
         <Container>
-          <SectionHeading eyebrow="The reasoning stack" title="Explainable AI, end to end" />
+          <SectionHeading eyebrow="The reasoning stack" title="Accelerated AI Inference & RAG" />
           <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2">
             {[
               {
-                icon: Network,
-                title: "Knowledge-graph annotation",
+                icon: Dna,
+                title: "NVIDIA BioNeMo Integration",
                 description:
-                  "Genes, variants, drugs, pathways, and indications are resolved against a live Neo4j graph — deterministic, auditable matches for everything already known.",
+                  "Leveraging NVIDIA BioNeMo to predict 3D protein structures (AlphaFold2/ESMFold) and design highly affine neoantigens for personalized mRNA vaccines.",
               },
               {
-                icon: Dna,
-                title: "Genomic foundation models",
+                icon: Cpu,
+                title: "Genomic Foundation Models",
                 description:
-                  "For variants no database has classified, a genomic foundation model (Evo 2) scores pathogenicity zero-shot, with an explicit uncertainty band rather than false precision.",
+                  "Utilizing models like Evo 2, accelerated by GPUs, to score variants of unknown significance (VUS) and perform deep sequence-level reasoning.",
               },
               {
                 icon: Workflow,
-                title: "Multi-agent retrieval",
+                title: "Multi-agent Semantic RAG",
                 description:
-                  "A LangGraph network of extractor, retriever, and critic agents matches genotypes to guidelines and trials using MedCPT biomedical embeddings — every claim traces to a source paragraph.",
+                  "A LangGraph architecture using local vector stores (e.g., Qdrant) and MedCPT embeddings to match patient genotypes with real-time clinical trials and literature without hallucinations.",
               },
               {
-                icon: MessagesSquare,
-                title: "Grounded clinical copilot",
+                icon: Network,
+                title: "Nextflow Bio-Pipelines",
                 description:
-                  "The physician-facing dashboard exposes a citation-grounded chat interface and one-click reporting — built to be interrogated, not just read.",
+                  "Highly parallelized, containerized execution of genomics workflows (WiGiTS, SAGE, LILAC) capable of running on local HPC clusters or bursting to cloud GPUs.",
               },
             ].map((item) => (
               <div key={item.title} className="rounded-2xl border border-border bg-white p-6">
@@ -141,21 +181,62 @@ export default function TechnologyPage() {
         </Container>
       </section>
 
+      {/* GPU WORKLOAD JUSTIFICATION */}
+      <section className="bg-background py-24 sm:py-28">
+        <Container>
+          <SectionHeading
+            eyebrow="Compute justification"
+            title={
+              <>
+                Every GPU workload, <span className="text-gradient">justified</span>
+              </>
+            }
+            description="We don't reach for a GPU by default — each workload below is GPU-bound because the alternative is either too slow to be clinically useful or physically impossible on CPU. Where CPU is the right tool, we use CPU."
+          />
+          <div className="mt-12 space-y-4">
+            {workloads.map((row) => (
+              <div
+                key={row.workload}
+                className="grid grid-cols-1 gap-3 rounded-2xl border border-border bg-white p-6 sm:grid-cols-[1fr_1.2fr_1.6fr] sm:items-center sm:gap-6"
+              >
+                <span className="font-display text-base font-semibold text-foreground">
+                  {row.workload}
+                </span>
+                <span className="inline-flex w-fit items-center rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs text-foreground">
+                  {row.tech}
+                </span>
+                <p className="text-sm leading-relaxed text-muted">{row.why}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 font-mono text-xs text-muted">
+            <span className="text-accent-strong">Roadmap —</span> evaluating GPU-accelerated
+            retrieval and graph-traversal engines to scale the knowledge graph further.
+          </p>
+        </Container>
+      </section>
+
       {/* GPU / SIMULATION */}
       <section className="relative isolate overflow-hidden py-24 sm:py-28">
         <GlowHero />
         <Container className="relative">
-          <Badge dark>GPU & simulation</Badge>
+          <Badge dark>GPU-Accelerated Computing</Badge>
           <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight text-hero-foreground">
-            A compute-first simulation engine, built to run anywhere
+            A compute-first simulation engine, built to{" "}
+            <span className="text-gradient-light">run anywhere</span>
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-hero-muted">
-            Digital Twin, our agent-based modeling engine, is written in C++20
-            against Vulkan 1.3 compute pipelines. All heavy simulation work —
-            agent updates, field diffusion, spatial queries — runs as GPU
-            compute dispatches; rendering exists only for visual debugging.
-            The engine is deliberately vendor-agnostic, so a hospital or lab
-            can run it on whatever accelerator they already own.
+            Our Agent-Based Modeling engine is written in C++20 with SYCL — a
+            vendor-neutral compute standard that runs across GPU
+            architectures.{" "}
+            <span className="text-sm text-hero-muted/70">
+              On NVIDIA hardware, it compiles to native CUDA for maximum
+              throughput.
+            </span>{" "}
+            By offloading massive spatial hashing and cell-to-cell collision
+            detection entirely to GPU compute shaders, we eliminate CPU
+            bottlenecks typical of legacy simulators — letting us model the
+            tumor microenvironment at a clinically useful scale.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-3">
             {[
@@ -171,8 +252,8 @@ export default function TechnologyPage() {
               },
               {
                 icon: Sparkles,
-                title: "Cross-vendor by design",
-                description: "Vulkan compute runs on NVIDIA, AMD, Intel, and ARM — deployment flexibility, not vendor lock-in.",
+                title: "Portable core, CUDA-tuned",
+                description: "SYCL keeps the codebase portable in principle — but every build defaults to NVIDIA's CUDA backend, where our own development, BioNeMo integration, and Evo 2 inference already live.",
               },
             ].map((item) => (
               <div key={item.title} className="rounded-2xl border border-hero-border bg-white/[0.03] p-6">
@@ -194,10 +275,12 @@ export default function TechnologyPage() {
           <div className="mt-6 flex flex-wrap gap-3">
             {stack.map((tech) => (
               <span
-                key={tech}
-                className="rounded-full border border-border bg-white px-4 py-2 font-mono text-xs text-foreground"
+                key={tech.name}
+                className={`rounded-full border px-4 py-2 font-mono text-xs text-foreground ${
+                  tech.nvidia ? "border-nvidia/40 bg-nvidia/5" : "border-border bg-white"
+                }`}
               >
-                {tech}
+                {tech.name}
               </span>
             ))}
           </div>

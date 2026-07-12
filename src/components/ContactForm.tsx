@@ -56,7 +56,7 @@ export default function ContactForm() {
       </label>
       <button
         type="submit"
-        className="mt-2 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-strong"
+        className="btn-primary mt-2 inline-flex w-fit items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium"
       >
         Send message
         <ArrowRight className="h-4 w-4" />

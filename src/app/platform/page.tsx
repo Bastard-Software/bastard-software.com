@@ -22,7 +22,7 @@ import PipelineSteps from "@/components/PipelineSteps";
 export const metadata: Metadata = {
   title: "Platform",
   description:
-    "The Bastard Software platform: a clinical trial matcher, the OncoKernel tumor genome interpretation pipeline, the Digital Twin GPU simulation engine, and AI-designed, wet-lab validated mRNA vaccines and CAR-T therapies.",
+    "The Bastard Software platform: a clinical trial matcher, the GPU-accelerated OncoKernel genome interpretation pipeline, the SYCL/CUDA Digital Twin simulation engine, and NVIDIA BioNeMo-designed, wet-lab validated mRNA vaccines and CAR-T therapies.",
 };
 
 const oncoKernelSteps = [
@@ -60,7 +60,11 @@ export default function PlatformPage() {
         <Container>
           <SectionHeading
             eyebrow="The Platform"
-            title="One pipeline, growing set of tools"
+            title={
+              <>
+                One pipeline, <span className="text-gradient">growing set of tools</span>
+              </>
+            }
             description="Each tool is built to stand on its own, and together they form a single continuous path — from the first search for a nearby trial, to a full molecular interpretation of the tumor, to simulating and designing the therapy itself. More tools join this pipeline over time."
           />
         </Container>
@@ -112,7 +116,7 @@ export default function PlatformPage() {
                   Biomarkers — <span className="text-foreground">TP53 R248W, TMB-high</span>
                 </div>
                 <div className="rounded-lg border border-border bg-surface px-4 py-3 text-sm text-muted">
-                  Location — <span className="text-foreground">Warsaw, PL · 200 km radius</span>
+                  Location — <span className="text-foreground">Kraków, PL · 200 km radius</span>
                 </div>
               </div>
               <div className="mt-6 space-y-3">
@@ -170,7 +174,7 @@ export default function PlatformPage() {
                 icon: Dna,
                 title: "Genomic foundation models",
                 description:
-                  "Zero-shot variant-effect scoring for mutations no database has classified yet, with a plain-language rationale attached.",
+                  "Zero-shot variant-effect scoring via Evo 2, GPU-accelerated, for mutations no database has classified yet — with a plain-language rationale attached.",
               },
               {
                 icon: Network,
@@ -182,7 +186,7 @@ export default function PlatformPage() {
                 icon: MessagesSquare,
                 title: "Grounded clinical copilot",
                 description:
-                  "Every answer cites the exact source paragraph. Informational decision support — the oncologist always decides.",
+                  "Served locally for low-latency inference — no cloud round-trip. Every answer cites the exact source paragraph; informational decision support, the oncologist always decides.",
               },
             ].map((item) => (
               <div key={item.title}>
@@ -201,38 +205,43 @@ export default function PlatformPage() {
       <section id="digital-twin" className="relative isolate scroll-mt-20 overflow-hidden py-24 sm:py-28">
         <GlowHero />
         <Container className="relative">
-          <Badge dark>Phase 2 — deep-tech vision</Badge>
+          <Badge dark>Active simulation engine</Badge>
           <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight text-hero-foreground sm:text-4xl">
-            A GPU-native digital twin of the tumor microenvironment
+            A GPU-native <span className="text-gradient-light">Digital Twin</span> of the tumor
+            microenvironment
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-hero-muted">
-            Digital Twin is our agent-based simulation engine, built compute-first
-            on Vulkan: cancer and stromal cells as agents, oxygen and growth
-            factors as continuous fields, running entirely on GPU compute
-            shaders. It is deliberately portable across NVIDIA, AMD, Intel, and
-            ARM hardware, with a built-in visual editor for constructing and
-            inspecting simulations.
+            Our Agent-Based Modeling (ABM) engine is built compute-first with
+            SYCL — a portable compute standard across GPU vendors.{" "}
+            <span className="text-sm text-hero-muted/70">
+              On NVIDIA hardware it compiles to native CUDA for maximum
+              performance.
+            </span>{" "}
+            It dynamically simulates cancer cells, immune infiltration (TILs),
+            and drug diffusion as continuous fields, executing entirely on GPU
+            compute shaders — letting us test AI-generated therapies in-silico
+            before they ever enter the wet lab.
           </p>
 
           <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-3">
             {[
               {
                 icon: Cpu,
-                title: "Compute-first architecture",
+                title: "SYCL Compute, GPU-Native",
                 description:
-                  "All heavy simulation work runs as GPU compute dispatches; rendering exists only for visual debugging, never in the critical path.",
+                  "Massively parallelized spatial hashing and collision detection on GPU compute shaders — eliminating CPU bottlenecks typical of legacy simulators.",
               },
               {
                 icon: Boxes,
                 title: "Biologically grounded agents",
                 description:
-                  "Cell behaviours follow real mechanisms — hypoxia response, angiogenic signalling, immune infiltration — not gameplay heuristics.",
+                  "Simulating hypoxia, angiogenic signalling, and CAR-T cell penetration based on the genomic profile extracted by OncoKernel.",
               },
               {
                 icon: FlaskConical,
-                title: "A white-box alternative to black-box AI",
+                title: "In-silico therapy screening",
                 description:
-                  "Physics-based, interpretable simulation for the step regulators and tumor boards trust least when it's opaque: predicting treatment response.",
+                  "Providing a deterministic, physics-based environment to evaluate the kinetic efficacy of immunotherapies designed by generative AI.",
               },
             ].map((item) => (
               <div key={item.title} className="rounded-2xl border border-hero-border bg-white/[0.03] p-6">
@@ -247,22 +256,15 @@ export default function PlatformPage() {
         </Container>
       </section>
 
-      {/* 04 — AI + WET LAB */}
+{/* 04 — AI + WET LAB */}
       <section id="ai-wetlab" className="scroll-mt-20 bg-surface py-24 sm:py-28">
         <Container>
-          <Badge>Phase 2 — deep-tech vision</Badge>
+          <Badge>Future Horizon — Phase 3</Badge>
           <h2 className="mt-5 max-w-2xl font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            AI + Wet Lab: from prediction to a physical therapy
+            AI + Wet Lab: Bringing in-silico designs to physical reality
           </h2>
           <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted">
-            The same mutation mapping and HLA typing that power OncoKernel,
-            combined with predictions from the digital twin, feed a
-            longer-range goal: designing personalized mRNA neoantigen
-            vaccines and CAR-T cell therapies, then preparing and validating
-            them physically — in patient-derived organoids and tumor-on-a-chip
-            models — before a therapy ever reaches a patient. This is the line
-            from software that reads a genome to an engine that helps design
-            the therapy itself.
+            While our software stack models the biology, our ultimate roadmap involves physical validation. In the future, the neoantigens identified by OncoKernel and folded by BioNeMo will be synthesized into mRNA vaccines and validated in patient-derived organoids and tumor-on-a-chip microfluidics in our partner wet labs.
           </p>
 
           <div className="mt-14 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -306,7 +308,7 @@ export default function PlatformPage() {
           </h2>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-accent-strong"
+            className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium"
           >
             Get in touch
             <ArrowRight className="h-4 w-4" />
