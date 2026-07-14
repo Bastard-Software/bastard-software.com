@@ -106,7 +106,7 @@ export default function PlatformPage() {
                 <div className="h-2.5 w-2.5 rounded-full bg-border" />
                 <div className="h-2.5 w-2.5 rounded-full bg-border" />
                 <div className="h-2.5 w-2.5 rounded-full bg-border" />
-                <span className="ml-2 font-mono text-xs text-muted">trial-matcher.bastard-software.com</span>
+                <span className="ml-2 font-mono text-xs text-muted">trial-matcher.oncokernel.com</span>
               </div>
               <div className="mt-5 space-y-3">
                 <div className="rounded-lg border border-border bg-surface px-4 py-3 text-sm text-muted">

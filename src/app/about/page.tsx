@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Stethoscope, Cpu, Users, Target } from "lucide-react";
 import Container from "@/components/Container";
 import SectionHeading from "@/components/SectionHeading";
@@ -12,14 +13,16 @@ export const metadata: Metadata = {
 
 const team = [
   {
-    initials: "MB",
+    photo: "/team/mateusz_bahyrycz.jpg",
+    photoFit: "object-contain",
     name: "Mateusz Bahyrycz",
     role: "Founder & CEO",
     badges: ["MD", "GPU / CUDA Systems Engineer"],
     bio: "Mateusz founded Bastard Software to close the gap between clinical medicine and the low-level compute infrastructure precision oncology actually needs — from SYCL/CUDA compute kernels to on-premise AI inference. He leads the company's technical architecture and the Digital Twin simulation engine.",
   },
   {
-    initials: "RN",
+    photo: "/team/rafal_nojek.jpg",
+    photoFit: "object-cover",
     name: "Rafał Nojek",
     role: "Co-Founder",
     badges: ["MD", "AI / ML Engineer"],
@@ -50,8 +53,14 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
             {team.map((person) => (
               <div key={person.name} className="flex flex-col items-center gap-6 text-center">
-                <div className="flex h-24 w-24 items-center justify-center rounded-full bg-gradient-to-br from-accent to-signal font-display text-2xl font-semibold text-white">
-                  {person.initials}
+                <div className="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-accent to-signal">
+                  <Image
+                    src={person.photo}
+                    alt={person.name}
+                    fill
+                    sizes="96px"
+                    className={person.photoFit}
+                  />
                 </div>
                 <div>
                   <h3 className="font-display text-xl font-semibold text-foreground">{person.name}</h3>
