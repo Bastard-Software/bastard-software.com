@@ -4,7 +4,7 @@ export default function PipelineSteps({
   steps,
   dark = false,
 }: {
-  steps: { label: string; title: string; description: string }[];
+  steps: readonly { label: string; title: string; description: string }[];
   dark?: boolean;
 }) {
   return (

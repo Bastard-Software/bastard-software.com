@@ -5,18 +5,21 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
-
-const links = [
-  { href: "/platform", label: "Platform" },
-  { href: "/technology", label: "Technology" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
-];
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
+  const { t } = useLanguage();
+
+  const links = [
+    { href: "/platform", label: t.nav.platform },
+    { href: "/technology", label: t.nav.technology },
+    { href: "/about", label: t.nav.about },
+    { href: "/contact", label: t.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -58,20 +61,26 @@ export default function Navbar() {
           })}
         </nav>
 
-        <Link
-          href="/contact"
-          className="btn-primary hidden rounded-full px-5 py-2.5 text-sm font-medium md:inline-flex"
-        >
-          Talk to us
-        </Link>
+        <div className="hidden items-center gap-4 md:flex">
+          <LanguageSwitcher />
+          <Link
+            href="/contact"
+            className="btn-primary rounded-full px-5 py-2.5 text-sm font-medium"
+          >
+            {t.nav.talkToUs}
+          </Link>
+        </div>
 
-        <button
-          className="inline-flex items-center justify-center rounded-md p-2 text-foreground md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <LanguageSwitcher />
+          <button
+            className="inline-flex items-center justify-center rounded-md p-2 text-foreground"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={t.nav.toggleMenu}
+          >
+            {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
       </div>
 
       <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
@@ -96,7 +105,7 @@ export default function Navbar() {
               className="btn-primary mt-2 inline-flex justify-center rounded-full px-5 py-2.5 text-sm font-medium"
               onClick={() => setOpen(false)}
             >
-              Talk to us
+              {t.nav.talkToUs}
             </Link>
           </nav>
         </div>
