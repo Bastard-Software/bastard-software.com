@@ -1,28 +1,33 @@
+"use client";
+
 import Link from "next/link";
 import Logo from "@/components/Logo";
 import Container from "@/components/Container";
-
-const columns = [
-  {
-    title: "Platform",
-    links: [
-      { href: "/platform#trial-matcher", label: "Trial Matcher" },
-      { href: "/platform#oncokernel", label: "OncoKernel" },
-      { href: "/platform#digital-twin", label: "Digital Twin" },
-      { href: "/platform#ai-wetlab", label: "AI + Wet Lab" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { href: "/technology", label: "Technology" },
-      { href: "/about", label: "About" },
-      { href: "/contact", label: "Contact" },
-    ],
-  },
-];
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 export default function Footer() {
+  const { t } = useLanguage();
+
+  const columns = [
+    {
+      title: t.footer.platformCol,
+      links: [
+        { href: "/platform#trial-matcher", label: t.footer.trialMatcher },
+        { href: "/platform#oncokernel", label: t.footer.oncokernel },
+        { href: "/platform#digital-twin", label: t.footer.digitalTwin },
+        { href: "/platform#ai-wetlab", label: t.footer.aiWetlab },
+      ],
+    },
+    {
+      title: t.footer.companyCol,
+      links: [
+        { href: "/technology", label: t.nav.technology },
+        { href: "/about", label: t.nav.about },
+        { href: "/contact", label: t.nav.contact },
+      ],
+    },
+  ];
+
   return (
     <footer className="border-t border-hero-border bg-hero-bg text-hero-muted">
       <Container className="py-16">
@@ -34,18 +39,10 @@ export default function Footer() {
                 Bastard Software
               </span>
             </div>
-            <p className="mt-4 text-sm leading-relaxed">
-              An on-premise AI and GPU-simulation pipeline for personalized cancer
-              treatment — from trial matching to tumor genome interpretation to
-              in-silico therapy testing.
-            </p>
-            <p className="mt-3 text-xs font-mono text-hero-muted/80">
-              Built on NVIDIA CUDA, BioNeMo &amp; Evo 2.
-            </p>
+            <p className="mt-4 text-sm leading-relaxed">{t.footer.tagline}</p>
+            <p className="mt-3 text-xs font-mono text-hero-muted/80">{t.footer.builtOn}</p>
             <p className="mt-4 text-xs leading-relaxed text-hero-muted/70">
-              Our tools provide informational, research-oriented decision support.
-              They do not diagnose, prescribe, or replace the judgment of a
-              qualified clinician.
+              {t.footer.disclaimer}
             </p>
           </div>
 
@@ -71,7 +68,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-hero-border pt-8 text-xs sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Bastard Software. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Bastard Software. {t.footer.rightsReserved}</p>
           <a
             href="mailto:mateusz.bahyrycz@bastard-software.com"
             className="transition-colors hover:text-hero-foreground"
