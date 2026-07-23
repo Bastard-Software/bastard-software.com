@@ -115,6 +115,12 @@ const en = {
         badges: ["MD", "AI / ML Engineer"],
         bio: "Rafał pairs a physician's perspective with deep expertise in machine learning, large language models, and data science. He is the core implementer of Bastard Software's AI stack, particularly OncoKernel's knowledge-graph reasoning and clinical copilot.",
       },
+      {
+        name: "Krystian Budek",
+        role: "Co-Founder",
+        badges: ["DevOps", "Cloud Infrastructure & Automation"],
+        bio: "Krystian brings a strong background in DevOps, cloud infrastructure, enterprise automation, and software development. He builds automated workflows and integrations across cloud platforms, identity systems, and business applications, with a focus on reliability and scalability. He also designed and built a web-based expense management application and brings his infrastructure and product engineering experience to OncoKernel.",
+      },
     ],
     paragraphs: [
       "That pairing is not incidental to the product — it is the thesis. Precision oncology software fails when it is built by one discipline in isolation: engineers who don't understand what a tumor board actually needs, or clinicians without the systems background to build AI infrastructure that runs safely inside a hospital network.",
@@ -525,6 +531,12 @@ const pl: Translations = {
         role: "Współzałożyciel",
         badges: ["Lekarz", "Inżynier AI / ML"],
         bio: "Rafał łączy perspektywę lekarza z doświadczeniem w uczeniu maszynowym, dużych modelach językowych i analizie danych. Jest głównym wykonawcą stosu AI w Bastard Software — w szczególności wnioskowania na grafie wiedzy w OncoKernel oraz asystenta klinicznego.",
+      },
+      {
+        name: "Krystian Budek",
+        role: "Współzałożyciel",
+        badges: ["DevOps", "Infrastruktura chmurowa i automatyzacja"],
+        bio: "Krystian ma solidne doświadczenie w obszarze DevOps, infrastruktury chmurowej, automatyzacji procesów oraz tworzenia oprogramowania. Projektuje i rozwija zautomatyzowane procesy oraz integracje pomiędzy platformami chmurowymi, systemami tożsamości i aplikacjami biznesowymi, koncentrując się na niezawodności i skalowalności. Stworzył również od podstaw webową aplikację do zarządzania wydatkami, a w OncoKernel wykorzystuje swoje doświadczenie w obszarze infrastruktury, automatyzacji i rozwoju produktów.",
       },
     ],
     paragraphs: [

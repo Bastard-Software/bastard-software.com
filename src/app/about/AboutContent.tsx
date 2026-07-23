@@ -10,6 +10,7 @@ import { useLanguage } from "@/lib/i18n/LanguageProvider";
 const teamMeta = [
   { photo: "/team/mateusz_bahyrycz.jpg", photoFit: "object-contain" },
   { photo: "/team/rafal_nojek.jpg", photoFit: "object-cover" },
+  { photo: "/team/krystian_budek.jpg", photoFit: "object-cover" },
 ];
 
 const thesisIcons = [Target, Stethoscope, Cpu, Users];
