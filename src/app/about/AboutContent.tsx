@@ -42,9 +42,16 @@ export default function AboutContent() {
 
       <section className="bg-background py-24 sm:py-28">
         <Container>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            {team.map((person) => (
-              <div key={person.name} className="flex flex-col items-center gap-6 text-center">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:justify-items-center">
+            {team.map((person, i) => (
+              <div
+                key={person.name}
+                className={`flex w-full max-w-md flex-col items-center gap-6 text-center ${
+                  team.length % 2 === 1 && i === team.length - 1
+                    ? "lg:col-span-2"
+                    : ""
+                }`}
+              >
                 <div className="relative h-24 w-24 overflow-hidden rounded-full bg-gradient-to-br from-accent to-signal">
                   <Image
                     src={person.photo}
