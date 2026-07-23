@@ -119,7 +119,7 @@ const en = {
         name: "Krystian Budek",
         role: "Co-Founder",
         badges: ["DevOps", "Cloud Infrastructure & Automation"],
-        bio: "Krystian brings a strong background in DevOps, cloud infrastructure, enterprise automation, and software development. He builds automated workflows and integrations across cloud platforms, identity systems, and business applications, with a focus on reliability and scalability. He also designed and built a web-based expense management application and brings his infrastructure and product engineering experience to OncoKernel.",
+        bio: "Krystian brings a strong background in DevOps, cloud infrastructure, enterprise automation, and software development. He builds automated workflows and integrations across cloud platforms, identity systems, and business applications. He brings his infrastructure and product engineering experience to OncoKernel.",
       },
     ],
     paragraphs: [
@@ -536,7 +536,7 @@ const pl: Translations = {
         name: "Krystian Budek",
         role: "Współzałożyciel",
         badges: ["DevOps", "Infrastruktura chmurowa i automatyzacja"],
-        bio: "Krystian ma solidne doświadczenie w obszarze DevOps, infrastruktury chmurowej, automatyzacji procesów oraz tworzenia oprogramowania. Projektuje i rozwija zautomatyzowane procesy oraz integracje pomiędzy platformami chmurowymi, systemami tożsamości i aplikacjami biznesowymi, koncentrując się na niezawodności i skalowalności. Stworzył również od podstaw webową aplikację do zarządzania wydatkami, a w OncoKernel wykorzystuje swoje doświadczenie w obszarze infrastruktury, automatyzacji i rozwoju produktów.",
+        bio: "Krystian ma solidne doświadczenie w obszarze DevOps, infrastruktury chmurowej, automatyzacji procesów oraz tworzenia oprogramowania. Projektuje i rozwija zautomatyzowane procesy oraz integracje pomiędzy platformami chmurowymi, systemami tożsamości i aplikacjami biznesowymi. W OncoKernel wykorzystuje swoje doświadczenie w obszarze infrastruktury, automatyzacji i rozwoju produktów.",
       },
     ],
     paragraphs: [
