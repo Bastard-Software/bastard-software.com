@@ -20,6 +20,7 @@ const en = {
       "Our tools provide informational, research-oriented decision support. They do not diagnose, prescribe, or replace the judgment of a qualified clinician.",
     platformCol: "Platform",
     companyCol: "Company",
+    programyLekowe: "Programy Lekowe",
     trialMatcher: "Trial Matcher",
     oncokernel: "OncoKernel",
     digitalTwin: "Digital Twin",
@@ -33,25 +34,41 @@ const en = {
     sub: "Bastard Software builds the compute infrastructure that translates raw tumor sequences into matched clinical trials, explainable treatment plans, and spatial GPU simulations of the tumor microenvironment.",
     exploreBtn: "Explore the platform",
     talkBtn: "Talk to us",
-    pipelineChips: ["Trial Matcher", "OncoKernel", "Digital Twin", "NVIDIA BioNeMo"],
+    pipelineChips: ["Programy Lekowe — live", "Trial Matcher", "OncoKernel", "Digital Twin"],
     problemEyebrow: "The problem",
     problemTitlePre: "Sequencing is cheap.",
     problemTitleGradient: "Compute-driven interpretation is the bottleneck.",
     problemDesc:
       "Hospitals generate terabytes of sequence data, but lack the HPC pipelines and AI reasoning to make it actionable. Actionable mutations are missed, and patients fail to match with life-saving trials.",
+    liveEyebrow: "Live now",
+    liveTitle: "Programy Lekowe — in the hands of Polish oncologists",
+    liveDesc:
+      "The first OncoKernel tool is public, free and running at oncokernel.com: a reader for the Polish Ministry of Health drug programme criteria. No account, no tracking, no data collected — just the qualification criteria an oncologist needs, in a form they can actually read.",
+    liveStats: [
+      { value: "142", label: "drug programmes parsed from the quarterly announcement" },
+      { value: "41", label: "oncology programmes, classified from the Ministry's own index" },
+      { value: "~300", label: "reimbursed substances linked to official product information" },
+      { value: "0", label: "cookies, trackers or personal data collected" },
+    ],
+    liveBullets: [
+      "Rebuilt from the Ministry's quarterly obwieszczenie, with a version stamp on every page",
+      "Spot-checked against the source documents by a licensed physician, licence number published",
+      "The reverse lookup nobody else offers — search by drug, find every programme it appears in",
+    ],
+    liveCta: "Open oncokernel.com",
     platformEyebrow: "The Platform",
     platformTitle: "A unified ecosystem for clinical decision support",
     platformDesc:
       "From instant trial matching for clinicians to deep GPU-accelerated tumor simulation.",
     pillars: [
       {
-        tag: "01 — Trial Matcher",
-        title: "Instant clinical trial matching for oncologists",
+        tag: "01 — OncoKernel · Trial Matcher",
+        title: "Clinical trial matching for oncologists",
         description:
-          "Our live clinician-facing portal. Enter patient biomarkers and location to instantly retrieve recruiting trials and drug reimbursement programmes using our LLM-powered RAG architecture.",
+          "In development, alongside Programy Lekowe, as the public half of OncoKernel. Enter biomarkers and a location to retrieve recruiting trials and reimbursement programmes — public registries only, no patient sequence involved.",
       },
       {
-        tag: "02 — OncoKernel",
+        tag: "02 — OncoKernel · Genome pipeline",
         title: "GPU-accelerated tumor genome interpretation",
         description:
           "Our on-premise pipeline processing FASTQ to actionable insights. We leverage GPU-accelerated foundation models to score variants of unknown significance and match genotypes to therapies.",
@@ -69,6 +86,7 @@ const en = {
           "Our future horizon: taking BioNeMo-generated protein structures and validating AI-designed neoantigen vaccines physically in patient-derived organoids.",
       },
     ],
+    learnMore: "Learn more",
     whyEyebrow: "Why it's different",
     whyTitle: "Engineered for high-performance computing",
     highlights: [
@@ -91,6 +109,16 @@ const en = {
         title: "Built by a clinician and an engineer",
         description:
           "Founded by a physician and a GPU systems engineer, bridging the gap between clinical reality and high-performance computing.",
+      },
+      {
+        title: "Capital-efficient by construction",
+        description:
+          "We wrap the gold-standard open-source bioinformatics the field has already validated rather than re-deriving solved problems — so engineering spend goes into the proprietary AI that is the actual moat.",
+      },
+      {
+        title: "A public front door that compounds",
+        description:
+          "The free clinician tools are not marketing. They put us in front of the oncologists we need as design partners, and they prove out the reimbursement and trial data layer the on-premise product depends on.",
       },
     ],
   },
@@ -178,8 +206,20 @@ const en = {
     introTitleGradient: "growing set of tools",
     introDesc:
       "Each tool is built to stand on its own, and together they form a single continuous path — from the first search for a nearby trial, to a full molecular interpretation of the tumor, to simulating and designing the therapy itself. More tools join this pipeline over time.",
+    programyLekowe: {
+      badge: "Live — free and public",
+      title: "Programy Lekowe: every Polish drug programme criterion, readable",
+      desc: "Poland publishes its reimbursed drug programmes as a quarterly ZIP of Word documents. Nobody could read them. We parse all 142 into a fast, searchable, version-stamped web reader — free, no account, no tracking — and a licensed physician spot-checks the output against the source. It is live at oncokernel.com.",
+      bullets: [
+        "142 programmes, 41 of them oncology, rebuilt from every quarterly announcement",
+        "Search by drug and find every programme it appears in — the reverse lookup nobody offers",
+        "Official product information (ChPL) linked for roughly 300 reimbursed substances",
+        "Version stamp and physician verification record on every page",
+      ],
+      cta: "Open oncokernel.com",
+    },
     trialMatcher: {
-      badge: "In development — the front door",
+      badge: "In development — the other half of the front door",
       title: "Find the closest matching clinical trial in seconds",
       desc: "A public-data panel built for oncologists. Enter an indication, a few biomarkers, and a location — get back the nearest recruiting clinical trials and the drug reimbursement programmes a patient would qualify for. Europe first: EU trial registries (CTIS, EUCTR) unioned with ClinicalTrials.gov, plus national drug reimbursement schemes.",
       bullets: [
@@ -187,7 +227,7 @@ const en = {
         "Includes national drug reimbursement programmes, not just trials",
         "Public registries only — no patient sequence ever touched",
       ],
-      panelUrl: "trial-matcher.oncokernel.com",
+      panelUrl: "oncokernel.com/trial-matcher",
       indication: "Indication",
       indicationValue: "Osteosarcoma",
       biomarkers: "Biomarkers",
@@ -436,6 +476,7 @@ const pl: Translations = {
     disclaimer:
       "Nasze narzędzia stanowią informacyjne, badawcze wsparcie decyzyjne. Nie diagnozują, nie przepisują leczenia ani nie zastępują osądu wykwalifikowanego lekarza.",
     platformCol: "Platforma",
+    programyLekowe: "Programy Lekowe",
     companyCol: "Firma",
     trialMatcher: "Trial Matcher",
     oncokernel: "OncoKernel",
@@ -450,25 +491,41 @@ const pl: Translations = {
     sub: "Bastard Software buduje infrastrukturę obliczeniową, która przekłada surowe sekwencje guza na dopasowane badania kliniczne, wytłumaczalne plany leczenia i przestrzenne symulacje GPU mikrośrodowiska nowotworu.",
     exploreBtn: "Poznaj platformę",
     talkBtn: "Porozmawiajmy",
-    pipelineChips: ["Trial Matcher", "OncoKernel", "Cyfrowy Bliźniak", "NVIDIA BioNeMo"],
+    pipelineChips: ["Programy Lekowe — dostępne", "Trial Matcher", "OncoKernel", "Cyfrowy Bliźniak"],
     problemEyebrow: "Problem",
     problemTitlePre: "Sekwencjonowanie jest tanie.",
     problemTitleGradient: "Wąskim gardłem jest interpretacja oparta na obliczeniach.",
     problemDesc:
       "Szpitale generują terabajty danych sekwencyjnych, ale brakuje im pipeline'ów HPC i wnioskowania AI, które przekułyby je w decyzje kliniczne. Istotne klinicznie mutacje pozostają przeoczone, a pacjenci nie trafiają do badań, które mogłyby uratować im życie.",
+    liveEyebrow: "Już działa",
+    liveTitle: "Programy Lekowe — w rękach polskich onkologów",
+    liveDesc:
+      "Pierwsze narzędzie OncoKernel jest publiczne, bezpłatne i działa pod adresem oncokernel.com: czytnik kryteriów programów lekowych Ministerstwa Zdrowia. Bez konta, bez śledzenia, bez zbierania danych — kryteria kwalifikacji, których potrzebuje onkolog, w formie, którą da się czytać.",
+    liveStats: [
+      { value: "142", label: "programy lekowe sparsowane z kwartalnego obwieszczenia" },
+      { value: "41", label: "programów onkologicznych, sklasyfikowanych wg indeksu Ministerstwa" },
+      { value: "~300", label: "refundowanych substancji z odnośnikami do ChPL" },
+      { value: "0", label: "cookies, trackerów i zbieranych danych osobowych" },
+    ],
+    liveBullets: [
+      "Odtwarzane z każdego kwartalnego obwieszczenia, ze stemplem wersji na każdej stronie",
+      "Wyrywkowo sprawdzane z dokumentami źródłowymi przez lekarza, z podanym numerem PWZ",
+      "Wyszukiwanie odwrotne, którego nie ma nikt inny — po leku znajdź wszystkie programy",
+    ],
+    liveCta: "Otwórz oncokernel.com",
     platformEyebrow: "Platforma",
     platformTitle: "Spójny ekosystem wsparcia decyzji klinicznych",
     platformDesc:
       "Od natychmiastowego dopasowywania badań klinicznych po głęboką symulację guza akcelerowaną przez GPU.",
     pillars: [
       {
-        tag: "01 — Trial Matcher",
+        tag: "01 — OncoKernel · Trial Matcher",
         title: "Natychmiastowe dopasowywanie badań klinicznych dla onkologów",
         description:
-          "Nasz działający portal dla klinicystów. Wprowadź biomarkery pacjenta i lokalizację, aby natychmiast otrzymać rekrutujące badania kliniczne i programy lekowe — dzięki architekturze RAG opartej na LLM.",
+          "W budowie, obok Programów Lekowych, jako publiczna część OncoKernel. Wprowadź biomarkery i lokalizację, aby otrzymać rekrutujące badania kliniczne i programy lekowe — wyłącznie rejestry publiczne, bez danych sekwencyjnych pacjenta.",
       },
       {
-        tag: "02 — OncoKernel",
+        tag: "02 — OncoKernel · Pipeline genomowy",
         title: "Interpretacja genomu guza akcelerowana przez GPU",
         description:
           "Nasz lokalny (on-premise) pipeline przetwarzający dane FASTQ we wnioski kliniczne. Wykorzystujemy akcelerowane przez GPU modele fundamentalne do oceny wariantów o nieznanym znaczeniu (VUS) i dopasowywania genotypów do terapii.",
@@ -486,6 +543,7 @@ const pl: Translations = {
           "Nasz horyzont: struktury białkowe generowane przez BioNeMo i fizyczna walidacja zaprojektowanych przez AI szczepionek neoantygenowych na organoidach pochodzących od pacjenta.",
       },
     ],
+    learnMore: "Dowiedz się więcej",
     whyEyebrow: "Co nas wyróżnia",
     whyTitle: "Zaprojektowane pod obliczenia wysokiej wydajności",
     highlights: [
@@ -508,6 +566,16 @@ const pl: Translations = {
         title: "Zbudowane przez lekarza i inżyniera",
         description:
           "Założone przez lekarza i inżyniera systemów GPU — łączymy realia kliniczne z obliczeniami wysokiej wydajności.",
+      },
+      {
+        title: "Efektywność kapitałowa wpisana w architekturę",
+        description:
+          "Opakowujemy sprawdzone, otwarte narzędzia bioinformatyczne zamiast wyważać otwarte drzwi — dzięki temu nakłady inżynierskie idą w zastrzeżone AI, które jest właściwą przewagą.",
+      },
+      {
+        title: "Publiczna brama, która się kumuluje",
+        description:
+          "Bezpłatne narzędzia dla klinicystów to nie marketing. Stawiają nas przed onkologami, których potrzebujemy jako partnerów projektowych, i weryfikują warstwę danych refundacyjnych, na której opiera się produkt on-premise.",
       },
     ],
   },
@@ -595,8 +663,20 @@ const pl: Translations = {
     introTitleGradient: "rosnący zestaw narzędzi",
     introDesc:
       "Każde narzędzie działa samodzielnie, a razem tworzą jedną ciągłą ścieżkę — od pierwszego wyszukania pobliskiego badania klinicznego, przez pełną interpretację molekularną guza, po symulację i projektowanie samej terapii. Z czasem dołączają do niej kolejne narzędzia.",
+    programyLekowe: {
+      badge: "Działa — bezpłatnie i publicznie",
+      title: "Programy Lekowe: wszystkie kryteria programów lekowych, czytelnie",
+      desc: "Polska publikuje programy lekowe jako kwartalny ZIP z dokumentami Word. Nikt nie był w stanie ich czytać. Parsujemy wszystkie 142 do szybkiego, przeszukiwalnego czytnika ze stemplem wersji — bezpłatnie, bez konta, bez śledzenia — a lekarz wyrywkowo sprawdza wynik z dokumentem źródłowym. Działa pod adresem oncokernel.com.",
+      bullets: [
+        "142 programy, w tym 41 onkologicznych, odtwarzane z każdego obwieszczenia",
+        "Szukaj po leku i znajdź każdy program, w którym występuje — wyszukiwanie odwrotne",
+        "Charakterystyki Produktu Leczniczego dla około 300 refundowanych substancji",
+        "Stempel wersji i zapis weryfikacji lekarskiej na każdej stronie",
+      ],
+      cta: "Otwórz oncokernel.com",
+    },
     trialMatcher: {
-      badge: "W budowie — brama wejściowa",
+      badge: "W budowie — druga połowa bramy wejściowej",
       title: "Znajdź najlepiej dopasowane badanie kliniczne w kilka sekund",
       desc: "Panel oparty na danych publicznych, zbudowany dla onkologów. Wprowadź wskazanie, kilka biomarkerów i lokalizację — otrzymasz najbliższe rekrutujące badania kliniczne oraz programy lekowe, do których pacjent by się kwalifikował. Europa najpierw: unijne rejestry badań (CTIS, EUCTR) połączone z ClinicalTrials.gov, plus krajowe programy refundacyjne.",
       bullets: [

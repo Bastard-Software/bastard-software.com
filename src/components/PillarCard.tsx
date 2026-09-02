@@ -7,12 +7,14 @@ export default function PillarCard({
   title,
   description,
   href,
+  learnMore,
 }: {
   icon: LucideIcon;
   tag: string;
   title: string;
   description: string;
   href: string;
+  learnMore: string;
 }) {
   const [num, ...rest] = tag.split("—");
   const label = rest.join("—").trim();
@@ -38,7 +40,7 @@ export default function PillarCard({
         <p className="mt-3 text-sm leading-relaxed text-muted">{description}</p>
       </div>
       <span className="relative mt-auto inline-flex items-center gap-1.5 text-sm font-medium text-accent-strong">
-        Learn more
+        {learnMore}
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </span>
     </Link>

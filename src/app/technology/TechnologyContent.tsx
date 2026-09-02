@@ -5,7 +5,6 @@ import {
   Lock,
   Network,
   Dna,
-  MessagesSquare,
   Cpu,
   Microscope,
   Boxes,

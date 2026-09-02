@@ -7,17 +7,17 @@ import SectionHeading from "@/components/SectionHeading";
 import Badge from "@/components/Badge";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-const teamMeta = [
-  { photo: "/team/mateusz_bahyrycz.jpg", photoFit: "object-contain" },
-  { photo: "/team/rafal_nojek.jpg", photoFit: "object-cover" },
-  { photo: "/team/krystian_budek.jpg", photoFit: "object-cover" },
+const teamPhotos = [
+  "/team/mateusz_bahyrycz.jpg",
+  "/team/rafal_nojek.jpg",
+  "/team/krystian_budek.jpg",
 ];
 
 const thesisIcons = [Target, Stethoscope, Cpu, Users];
 
 export default function AboutContent() {
   const { t } = useLanguage();
-  const team = t.about.team.map((person, i) => ({ ...person, ...teamMeta[i] }));
+  const team = t.about.team.map((person, i) => ({ ...person, photo: teamPhotos[i] }));
   const thesisCards = t.about.thesisCards.map((card, i) => ({
     ...card,
     icon: thesisIcons[i],
@@ -58,7 +58,7 @@ export default function AboutContent() {
                     alt={person.name}
                     fill
                     sizes="96px"
-                    className={person.photoFit}
+                    className="object-cover"
                   />
                 </div>
                 <div>

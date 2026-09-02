@@ -12,6 +12,7 @@ export default function Footer() {
     {
       title: t.footer.platformCol,
       links: [
+        { href: "/platform#programy-lekowe", label: t.footer.programyLekowe },
         { href: "/platform#trial-matcher", label: t.footer.trialMatcher },
         { href: "/platform#oncokernel", label: t.footer.oncokernel },
         { href: "/platform#digital-twin", label: t.footer.digitalTwin },
@@ -34,7 +35,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-[2fr_1fr_1fr]">
           <div className="max-w-sm">
             <div className="flex items-center gap-3">
-              <Logo className="h-8 w-8" />
+              <Logo className="h-8 w-auto" />
               <span className="font-display text-lg font-semibold text-hero-foreground">
                 Bastard Software
               </span>
