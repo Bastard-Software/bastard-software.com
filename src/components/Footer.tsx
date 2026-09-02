@@ -12,6 +12,7 @@ export default function Footer() {
     {
       title: t.footer.platformCol,
       links: [
+        { href: "/platform#programy-lekowe", label: t.footer.programyLekowe },
         { href: "/platform#trial-matcher", label: t.footer.trialMatcher },
         { href: "/platform#oncokernel", label: t.footer.oncokernel },
         { href: "/platform#digital-twin", label: t.footer.digitalTwin },

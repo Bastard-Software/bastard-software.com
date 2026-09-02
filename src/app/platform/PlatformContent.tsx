@@ -3,6 +3,8 @@
 import Link from "next/link";
 import {
   ArrowRight,
+  ArrowUpRight,
+  Check,
   Search,
   Landmark,
   ShieldCheck,
@@ -48,6 +50,67 @@ export default function PlatformContent() {
       </section>
 
       {/* 01 — TRIAL MATCHER */}
+      {/* PROGRAMY LEKOWE — the only shipped product, so it leads the platform page. */}
+      <section id="programy-lekowe" className="scroll-mt-20 bg-background py-24 sm:py-28">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:items-center">
+              <div>
+                <Badge>{p.programyLekowe.badge}</Badge>
+                <h2 className="mt-5 font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+                  {p.programyLekowe.title}
+                </h2>
+                <p className="mt-5 text-base leading-relaxed text-muted">{p.programyLekowe.desc}</p>
+                <ul className="mt-7 space-y-3">
+                  {p.programyLekowe.bullets.map((text) => (
+                    <li key={text} className="flex gap-3 text-sm leading-relaxed text-muted">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-accent-strong" strokeWidth={2.5} />
+                      <span>{text}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="https://oncokernel.com"
+                  className="group mt-8 inline-flex items-center gap-2 text-sm font-medium text-accent-strong"
+                >
+                  {p.programyLekowe.cta}
+                  <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                </a>
+              </div>
+
+              <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-[0_30px_60px_-30px_rgba(8,145,168,0.35)]">
+                <div className="flex items-center gap-2 border-b border-border bg-surface px-4 py-3">
+                  <span className="h-2.5 w-2.5 rounded-full bg-border" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-border" />
+                  <span className="h-2.5 w-2.5 rounded-full bg-border" />
+                  <span className="ml-2 font-mono text-xs text-muted">oncokernel.com/programy</span>
+                </div>
+                <div className="space-y-4 p-5">
+                  <div className="rounded-lg bg-surface px-3 py-2 font-mono text-xs text-muted">
+                    rak pluca
+                  </div>
+                  <div className="rounded-xl border border-border p-4">
+                    <span className="font-mono text-xs text-accent-strong">B.6</span>
+                    <p className="mt-1 text-sm font-medium leading-snug text-foreground">
+                      LECZENIE CHORYCH NA RAKA PLUCA (ICD-10: C34)
+                    </p>
+                    <p className="mt-2 font-mono text-xs text-muted">C34 · C45 · 25 schematow leczenia</p>
+                  </div>
+                  <div className="rounded-xl border border-border p-4">
+                    <span className="font-mono text-xs text-accent-strong">B.9.FM</span>
+                    <p className="mt-1 text-sm font-medium leading-snug text-foreground">
+                      LECZENIE CHORYCH NA RAKA PIERSI (ICD-10: C50)
+                    </p>
+                    <p className="mt-2 font-mono text-xs text-muted">C50 · 18 schematow leczenia</p>
+                  </div>
+                  <p className="font-mono text-[11px] leading-relaxed text-muted">
+                    Obwieszczenie MZ nr 83 · stan na 01-07-2026
+                  </p>
+                </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       <section id="trial-matcher" className="scroll-mt-20 bg-background py-24 sm:py-28">
         <Container>
           <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:items-center">
