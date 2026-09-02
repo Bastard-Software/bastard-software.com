@@ -38,7 +38,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-          <Logo className="h-8 w-8" />
+          <Logo className="h-8 w-auto" />
           <span className="font-display text-lg font-semibold tracking-tight text-foreground">
             Bastard Software
           </span>
