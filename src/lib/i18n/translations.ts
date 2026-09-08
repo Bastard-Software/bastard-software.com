@@ -456,6 +456,33 @@ const en = {
     },
     builtWith: "Built with",
   },
+  meta: {
+    home: {
+      title: "Bastard Software — Personalized Oncology, Engineered",
+      description:
+        "Bastard Software builds the on-premise, GPU-accelerated AI pipeline for personalized cancer treatment: clinical trial matching, tumor DNA interpretation, a SYCL/CUDA-powered digital twin, and NVIDIA BioNeMo-designed mRNA neoantigen vaccines — all in-silico before reaching a patient.",
+    },
+    platform: {
+      title: "Platform",
+      description:
+        "The Bastard Software platform: a clinical trial matcher, the GPU-accelerated OncoKernel genome interpretation pipeline, the SYCL/CUDA Digital Twin simulation engine, and NVIDIA BioNeMo-designed, wet-lab validated mRNA vaccines and CAR-T therapies.",
+    },
+    technology: {
+      title: "Technology",
+      description:
+        "The architecture behind Bastard Software: on-premise GDPR-by-design infrastructure, GPU-accelerated genomic AI (NVIDIA BioNeMo, Evo 2), and a SYCL/CUDA simulation engine.",
+    },
+    about: {
+      title: "About",
+      description:
+        "Bastard Software is building the on-premise AI and GPU-simulation pipeline for personalized cancer treatment — founded by a physician and a computer scientist, with a practicing oncologist as clinical design partner.",
+    },
+    contact: {
+      title: "Contact",
+      description:
+        "Get in touch with Bastard Software — hospitals, research partners, and investors welcome.",
+    },
+  },
 };
 
 export type Translations = typeof en;
@@ -912,6 +939,33 @@ const pl: Translations = {
       ],
     },
     builtWith: "Zbudowane z użyciem",
+  },
+  meta: {
+    home: {
+      title: "Bastard Software — Spersonalizowana onkologia, inżynieryjnie",
+      description:
+        "Bastard Software buduje lokalny (on-premise), akcelerowany przez GPU pipeline AI dla spersonalizowanego leczenia nowotworów: dopasowywanie badań klinicznych, interpretację DNA guza, cyfrowego bliźniaka opartego na SYCL/CUDA oraz szczepionki mRNA na neoantygeny projektowane w NVIDIA BioNeMo — wszystko in silico, zanim trafi do pacjenta.",
+    },
+    platform: {
+      title: "Platforma",
+      description:
+        "Platforma Bastard Software: dopasowywanie badań klinicznych, akcelerowany przez GPU pipeline interpretacji genomu OncoKernel, silnik symulacji Cyfrowy Bliźniak w SYCL/CUDA oraz projektowane w NVIDIA BioNeMo i walidowane w wet lab szczepionki mRNA i terapie CAR-T.",
+    },
+    technology: {
+      title: "Technologia",
+      description:
+        "Architektura Bastard Software: lokalna (on-premise) infrastruktura zgodna z RODO od podstaw, genomowe AI akcelerowane przez GPU (NVIDIA BioNeMo, Evo 2) oraz silnik symulacji SYCL/CUDA.",
+    },
+    about: {
+      title: "O nas",
+      description:
+        "Bastard Software buduje lokalny pipeline AI i symulacji GPU dla spersonalizowanego leczenia nowotworów — założony przez lekarza i informatyka, z praktykującym onkologiem jako klinicznym partnerem projektowym.",
+    },
+    contact: {
+      title: "Kontakt",
+      description:
+        "Skontaktuj się z Bastard Software — zapraszamy szpitale, partnerów badawczych i inwestorów.",
+    },
   },
 };
 

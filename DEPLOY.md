@@ -198,39 +198,58 @@ the only copy.
 
 # Part 2 — Cut the domain over
 
-DNS for `bastard-software.com` is on **Google Cloud DNS** (`ns-cloud-a1..a4.googledomains.com`,
-SOA `cloud-dns-hostmaster.google.com`), not at the registrar and not at Vercel. Vercel is
-reached only through records in that zone, which means the cutover is entirely under your
-control and the rollback is one record edit.
+DNS for `bastard-software.com` is edited in the **Squarespace** domain panel:
+**Settings → Domains → bastard-software.com → DNS → DNS Settings**, under *Custom records*.
 
-Current state:
+The nameservers are `ns-cloud-a1..a4.googledomains.com` and the SOA is
+`cloud-dns-hostmaster.google.com`, which looks like Cloud DNS and is not. Squarespace
+inherited Google Domains and still runs those domains on Google's DNS infrastructure. **There
+is no managed zone in your GCP console to find**, and creating one there would change
+nothing — the registrar's nameservers decide who answers.
+
+Starting state:
 
 | Type | Name | Value | TTL |
 |---|---|---|---|
-| A | `bastard-software.com` | `216.198.79.1` (Vercel) | 1800 |
-| CNAME | `www` | `a832d2309756550a.vercel-dns-017.com` (Vercel) | 1800 |
-| MX | `bastard-software.com` | `smtp.google.com` | — |
-| TXT | `bastard-software.com` | `v=spf1 include:_spf.google.com ~all` | — |
+| A | `@` | `216.198.79.1` (Vercel) | 1 hr |
+| CNAME | `www` | `a832d2309756550a.vercel-dns-017.com` (Vercel) | 30 mins |
+| MX | `@` | `smtp.google.com` | 1 hr |
+| TXT | `@` | `v=spf1 include:_spf.google.com ~all` | 1 hr |
+| TXT | `google._domainkey` | `v=DKIM1; k=rsa; ...` | 1 hr |
 
-**Do not touch MX, and do not remove the SPF value.** They are Google Workspace email and
-have nothing to do with hosting.
+**Do not touch MX, SPF or DKIM.** They are Google Workspace email and have nothing to do
+with hosting.
 
-## Step 1 — Find the zone
+## Step 1 — The NAME field trap, before you type anything
 
-<https://console.cloud.google.com/net-services/dns/zones>, then cycle the project picker
-until the zone holding `bastard-software.com` appears. It is in whichever project was used
-when the domain was first configured, which is **not** the new project you just created.
+Squarespace treats **NAME as a label relative to the zone** and appends the domain to
+whatever you type. Firebase's setup dialog labels its column *Domain name* and prints the
+value `bastard-software.com`. Pasting that verbatim creates
+**`bastard-software.com.bastard-software.com`** — a subdomain nothing will ever query.
 
-**Leave it there.** Do not create a new zone in the new project — that would require
-changing nameservers at the registrar and re-propagating the whole domain, including email.
-Records for a Cloud Run service in project B can live in a zone in project A; nothing about
-Firebase requires them to be co-located.
+**The apex is `@`.** Every record Firebase or Search Console describes as being on
+`bastard-software.com` goes in as `@`.
+
+The failure is silent and total. Firebase never sees its verification TXT, so the domain
+never verifies; and if the old apex A record was removed in the same sitting, the site stops
+resolving altogether while `www` keeps serving from the old host, which disguises it. Check
+each record against the authoritative nameserver after adding it:
+
+```bash
+nslookup -type=a bastard-software.com ns-cloud-a1.googledomains.com
+```
+
+A reply of `SOA` rather than an address means there is no record at that name.
+
+Unlike Cloud DNS, Squarespace allows several separate TXT rows on the same name, so the
+verification strings below are added as their own rows rather than appended to the SPF
+record. Leave the SPF row untouched.
 
 ## Step 2 — Lower the TTLs first, then wait
 
-Edit the apex `A` record set and the `www` `CNAME` record set and set **TTL 300** on both,
-changing nothing else. Then **wait at least 30 minutes** — the old 1800-second TTL has to
-expire out of resolver caches before the new one is in force.
+Edit the `@` **A** row and the `www` **CNAME** row and set **TTL 5 min** on both, changing
+nothing else. Then **wait an hour** — the old 1-hour TTL has to expire out of resolver caches
+before the new one is in force.
 
 This is the step that makes the rollback fast. Skip it and a bad cutover is stuck in caches
 for half an hour.
@@ -245,12 +264,11 @@ as canonical, so an apex that redirects away points every canonical URL at a red
 Ticking it and naming `www` produces a live certificate, a green "Connected" chip, and a
 site that 301s into nothing.
 
-Firebase shows a TXT record, `hosting-site=<site-id>`, and one or more A records.
+Firebase shows a TXT record, `hosting-site=<site-id>`, and one or more A records. It labels
+both as being on `bastard-software.com`.
 
-**Add the TXT record now and nothing else.** In Cloud DNS a name can hold only one record
-set per type, so you do **not** create a second TXT record — you **edit the existing apex
-TXT record set and add `hosting-site=<site-id>` as an additional value**, alongside the SPF
-string. Two values in one record set is normal and does not affect SPF.
+**Add the TXT record now and nothing else**, as a new row with NAME **`@`** — not
+`bastard-software.com`. See Step 1.
 
 Adding the TXT changes nothing a visitor sees. The site keeps serving from Vercel while
 Firebase verifies ownership.
@@ -259,10 +277,10 @@ Firebase verifies ownership.
 
 Once Firebase reports the domain verified:
 
-| Type | Name | Action |
+| Type | NAME | Action |
 |---|---|---|
-| A | `bastard-software.com` | replace `216.198.79.1` with the IPv4 address(es) Firebase shows |
-| CNAME | `www` | **delete** the record set |
+| A | `@` | replace `216.198.79.1` with the IPv4 address(es) Firebase shows |
+| CNAME | `www` | **delete** the row |
 | A | `www` | create, with the address(es) Firebase shows for `www` |
 
 `www` moves from a CNAME to A records because Firebase issues A records for custom domains,
@@ -296,6 +314,27 @@ curl -sSI https://bastard-software.com/
 The domain shows **Connected** in the Firebase Hosting console when it is done. Verify all
 five pages, `/sitemap.xml`, `/robots.txt`, and that `www` redirects to the apex.
 
+### If browsers get "Site Not Found" but `curl` gets the site
+
+Firebase answers with a cacheable 404 while a domain is connected but its Hosting site has no
+release yet, and its CDN keeps that page. Responses carry `Vary: accept-encoding`, so each
+encoding is a **separate cached object**: `curl` sends identity or gzip and gets the real
+site, while every browser sends `br`/`zstd` and gets the stale 404. The result looks exactly
+like a browser cache problem and survives hard-refresh, incognito and a different browser,
+because the stale copy is at Google's edge.
+
+Always reproduce with the encoding browsers actually send:
+
+```bash
+curl -s -o /dev/null -w "%{http_code} %{size_download}\n" -H "Accept-Encoding: gzip, deflate, br, zstd" https://bastard-software.com/
+```
+
+Redeploying Hosting cuts a new release and invalidates the CDN:
+
+```bash
+firebase deploy --only hosting --project bastard-software
+```
+
 If the domain was set to redirect by mistake, the domain's **⋮ → Edit domain** dialog
 switches it back to *Serve traffic from this domain* in place — no need to remove and
 re-add, so the certificate is kept. The browser will keep following the old redirect
@@ -324,8 +363,9 @@ In that case **transfer the registration out first** (Domains → the domain →
 unlock, take the auth/EPP code) and complete the transfer at the receiving registrar before
 continuing. Do not delete the project or the account until that transfer is confirmed.
 
-The nameservers point at Cloud DNS, which suggests the domain is registered elsewhere — most
-likely Squarespace, which absorbed Google Domains. Confirm rather than assume.
+The domain is registered at **Squarespace**, which absorbed Google Domains, and its DNS is
+edited there — so Vercel holds no registration and no zone. This check is a formality, but do
+it rather than assume.
 
 ## Step 2 — Disconnect the Git integration
 
@@ -433,10 +473,10 @@ property is a superset and the two coexist.
 
 Search Console shows a value like `google-site-verification=xxxxxxxxxxxxxxxxxxxxxxxx`.
 
-In Cloud DNS, **edit the existing apex TXT record set and add this as a further value** — the
-same rule as the Firebase verification string. By this point that one record set holds three
-values: SPF, `hosting-site=...`, and `google-site-verification=...`. That is correct and
-normal; what would break things is replacing the set instead of appending to it.
+Add it in Squarespace as a **new TXT row with NAME `@`** — the same rule as the Firebase
+string, and the same trap if you type the domain instead. The apex then carries three TXT
+rows: SPF, `hosting-site=...`, and `google-site-verification=...`. That is correct and does
+not affect mail.
 
 Click **Verify**. It usually succeeds within a minute or two; if not, wait out the TTL and
 retry rather than editing the record again.
@@ -485,17 +525,19 @@ property.
 - **Sitemaps** — *Last read* should be recent, *Discovered URLs* should be 5.
 - **Settings → Ownership verification** — the DNS record should still show as verified.
 
-## What Search Console will and will not see
+## Both languages are indexed separately
 
-The language switcher is a **client-side preference stored in `localStorage`**, not a route.
-Every page has exactly one URL, and the prerendered HTML that Googlebot receives is the
-**English** one. The Polish translation exists only after hydration and is not separately
-indexable.
+English is the default and keeps the unprefixed URLs; Polish lives under `/pl`. All ten
+pages are prerendered, so Googlebot receives real Polish HTML with a Polish `<title>`,
+description and `lang` attribute — no JavaScript required.
 
-That is a consequence of the current i18n design, not something to fix in the sitemap. If
-Polish-language search traffic ever matters, it needs real per-locale routes (`/pl/platform`
-and so on) with `alternates.languages` in the sitemap and `hreflang` in the metadata — a
-product change, not a Search Console setting.
+Every page declares a canonical plus reciprocal `hreflang` for `en`, `pl` and `x-default`
+(English), and the sitemap repeats those annotations on all ten URLs. That is what stops the
+two languages being read as duplicate content rather than translations.
+
+There is deliberately **no automatic language redirect**. A Polish visitor landing on `/`
+gets English with a PL switch in the header, because redirecting on `Accept-Language` hides
+one language from crawlers and overrides a choice the visitor may have made deliberately.
 
 ## Optional: Bing
 
@@ -544,8 +586,8 @@ per project for Cloud Run. Two low-traffic sites still cost nothing.
 # Rollback
 
 **DNS rollback**, if the new host misbehaves during cutover and the Vercel project still
-exists: set the apex A record back to `216.198.79.1` and restore the `www` CNAME to
-`a832d2309756550a.vercel-dns-017.com`. With TTL 300 this takes effect in five minutes.
+exists: set the `@` A row back to `216.198.79.1` and restore the `www` CNAME to
+`a832d2309756550a.vercel-dns-017.com`. With TTL 5 min this takes effect in five minutes.
 
 **Revision rollback**, for a bad deploy after the migration:
 
