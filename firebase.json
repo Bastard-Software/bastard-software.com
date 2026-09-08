@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "firebase-public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": { "serviceId": "bastard-software", "region": "europe-central2" }
+      }
+    ]
+  }
+}
