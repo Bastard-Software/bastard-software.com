@@ -22,6 +22,7 @@ import Badge from "@/components/Badge";
 import SectionHeading from "@/components/SectionHeading";
 import PipelineSteps from "@/components/PipelineSteps";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { localePath } from "@/lib/i18n/paths";
 
 const trialMatcherBulletIcons = [Search, Landmark, ShieldCheck];
 const oncokernelCardIcons = [ShieldCheck, Dna, Network, MessagesSquare];
@@ -29,7 +30,7 @@ const digitalTwinCardIcons = [Cpu, Boxes, FlaskConical];
 const aiWetlabCardIcons = [Syringe, Dna, FlaskConical];
 
 export default function PlatformContent() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
   const p = t.platform;
 
   return (
@@ -270,7 +271,7 @@ export default function PlatformContent() {
             {p.cta.title}
           </h2>
           <Link
-            href="/contact"
+            href={localePath(locale, "/contact")}
             className="btn-primary inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium"
           >
             {p.cta.button}

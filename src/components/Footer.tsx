@@ -4,27 +4,28 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 import Container from "@/components/Container";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { localePath } from "@/lib/i18n/paths";
 
 export default function Footer() {
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
 
   const columns = [
     {
       title: t.footer.platformCol,
       links: [
-        { href: "/platform#programy-lekowe", label: t.footer.programyLekowe },
-        { href: "/platform#trial-matcher", label: t.footer.trialMatcher },
-        { href: "/platform#oncokernel", label: t.footer.oncokernel },
-        { href: "/platform#digital-twin", label: t.footer.digitalTwin },
-        { href: "/platform#ai-wetlab", label: t.footer.aiWetlab },
+        { href: localePath(locale, "/platform#programy-lekowe"), label: t.footer.programyLekowe },
+        { href: localePath(locale, "/platform#trial-matcher"), label: t.footer.trialMatcher },
+        { href: localePath(locale, "/platform#oncokernel"), label: t.footer.oncokernel },
+        { href: localePath(locale, "/platform#digital-twin"), label: t.footer.digitalTwin },
+        { href: localePath(locale, "/platform#ai-wetlab"), label: t.footer.aiWetlab },
       ],
     },
     {
       title: t.footer.companyCol,
       links: [
-        { href: "/technology", label: t.nav.technology },
-        { href: "/about", label: t.nav.about },
-        { href: "/contact", label: t.nav.contact },
+        { href: localePath(locale, "/technology"), label: t.nav.technology },
+        { href: localePath(locale, "/about"), label: t.nav.about },
+        { href: localePath(locale, "/contact"), label: t.nav.contact },
       ],
     },
   ];

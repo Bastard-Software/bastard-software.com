@@ -1,8 +1,8 @@
 import { pageMetadata } from "@/lib/i18n/metadata";
 import ContactContent from "@/app/contact/ContactContent";
 
-export const metadata = pageMetadata("en", "contact");
+export const metadata = pageMetadata("pl", "contact");
 
-export default function EnContactPage() {
+export default function PlContactPage() {
   return <ContactContent />;
 }

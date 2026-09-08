@@ -7,18 +7,19 @@ import { Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { localePath } from "@/lib/i18n/paths";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
-  const { t } = useLanguage();
+  const { locale, t } = useLanguage();
 
   const links = [
-    { href: "/platform", label: t.nav.platform },
-    { href: "/technology", label: t.nav.technology },
-    { href: "/about", label: t.nav.about },
-    { href: "/contact", label: t.nav.contact },
+    { href: localePath(locale, "/platform"), label: t.nav.platform },
+    { href: localePath(locale, "/technology"), label: t.nav.technology },
+    { href: localePath(locale, "/about"), label: t.nav.about },
+    { href: localePath(locale, "/contact"), label: t.nav.contact },
   ];
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
-        <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+        <Link href={localePath(locale, "/")} className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <Logo className="h-8 w-auto" />
           <span className="font-display text-lg font-semibold tracking-tight text-foreground">
             Bastard Software
@@ -64,7 +65,7 @@ export default function Navbar() {
         <div className="hidden items-center gap-4 md:flex">
           <LanguageSwitcher />
           <Link
-            href="/contact"
+            href={localePath(locale, "/contact")}
             className="btn-primary rounded-full px-5 py-2.5 text-sm font-medium"
           >
             {t.nav.talkToUs}
@@ -101,7 +102,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="/contact"
+              href={localePath(locale, "/contact")}
               className="btn-primary mt-2 inline-flex justify-center rounded-full px-5 py-2.5 text-sm font-medium"
               onClick={() => setOpen(false)}
             >

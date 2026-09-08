@@ -1,6 +1,9 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { localePath, stripLocale } from "@/lib/i18n/paths";
 import { locales } from "@/lib/i18n/translations";
 
 const labels: Record<string, string> = {
@@ -9,7 +12,8 @@ const labels: Record<string, string> = {
 };
 
 export default function LanguageSwitcher({ className = "" }: { className?: string }) {
-  const { locale, setLocale } = useLanguage();
+  const { locale } = useLanguage();
+  const path = stripLocale(usePathname());
 
   return (
     <div
@@ -18,11 +22,11 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
       aria-label="Language"
     >
       {locales.map((l) => (
-        <button
+        <Link
           key={l}
-          type="button"
-          onClick={() => setLocale(l)}
-          aria-pressed={locale === l}
+          href={localePath(l, path)}
+          hrefLang={l}
+          aria-current={locale === l ? "true" : undefined}
           className={`rounded-full px-2.5 py-1 transition-colors ${
             locale === l
               ? "bg-foreground text-background"
@@ -30,7 +34,7 @@ export default function LanguageSwitcher({ className = "" }: { className?: strin
           }`}
         >
           {labels[l]}
-        </button>
+        </Link>
       ))}
     </div>
   );
